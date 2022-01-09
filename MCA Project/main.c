@@ -5,18 +5,18 @@
 typedef struct Student
 {
     char studentName[50];
-    char studentId[15];
-    char studentDept[10];
+    char studentID[15];
+    char studentDepartment[10];
     char studentAddress[100];
-    char studentContactNum[15];
+    char studentContactNumber[15];
     float studentCGPA;
 } Student;
 
 void createAccount();
-void displayInfo();
-void updateInfo();
-void deleteInfo();
-void searchInfo();
+void displayInformation();
+void updateInformation();
+void deleteInformation();
+void searchInformation();
 
 int main()
 {
@@ -42,16 +42,16 @@ int main()
             createAccount();
             break;
         case '2':
-            displayInfo();
+            displayInformation();
             break;
         case '3':
-            updateInfo();
+            updateInformation();
             break;
         case '4':
-            deleteInfo();
+            deleteInformation();
             break;
         case '5':
-            searchInfo();
+            searchInformation();
             break;
         case '0':
             printf("\n\t\t\t====== Thank You ======");
@@ -78,30 +78,30 @@ void createAccount()
 
     printf("\t\t\t====== Create Student Account ======\n");
 
-    printf("\n\t\t\tEnter Student's Name : ");
+    printf("\n\t\t\tEnter Student's Name: ");
     getchar();
     gets(stundentInformation.studentName);
-    printf("\t\t\tEnter Student's ID : ");
-    gets(stundentInformation.studentId);
-    printf("\t\t\tEnter Student's Depertment : ");
-    gets(stundentInformation.studentDept);
-    printf("\t\t\tEnter Student's Address : ");
+    printf("\t\t\tEnter Student's ID: ");
+    gets(stundentInformation.studentID);
+    printf("\t\t\tEnter Student's Department: ");
+    gets(stundentInformation.studentDepartment);
+    printf("\t\t\tEnter Student's Address: ");
     gets(stundentInformation.studentAddress);
-    printf("\t\t\tEnter Student's Contact Number : ");
-    gets(stundentInformation.studentContactNum);
-    printf("\t\t\tEnter Student's Current CGPA : ");
+    printf("\t\t\tEnter Student's Contact Number: ");
+    gets(stundentInformation.studentContactNumber);
+    printf("\t\t\tEnter Student's Current CGPA: ");
     scanf("%f", &stundentInformation.studentCGPA);
 
     fwrite(&stundentInformation, sizeof(stundentInformation), 1, fileOne);
 
-    printf("\n\n\t\t\tInformations have been stored sucessfully\n");
+    printf("\n\n\t\t\tInformations have been stored successfully\n");
     printf("\n\n\t\t\tEnter any keys to continue.......");
     getch();
 
     fclose(fileOne);
 }
 
-void displayInfo()
+void displayInformation()
 {
     FILE *fileOne = fopen("studentInfo.bin", "rb");
 
@@ -116,12 +116,12 @@ void displayInfo()
 
     printf("\t\t\t\t====== All Students Information ======\n");
 
-    printf("\n\n\t\t%-20s%-13s%-10s%-25s%-15s%-s\n", "Name", "ID", "Dept.", "Address", "Contact", "CGPA");
+    printf("\n\n\t\t%-20s%-13s%-10s%-25s%-15s%-s\n", "Name", "ID", "Department", "Address", "Contact", "CGPA");
     printf("\t\t----------------------------------------------------------------------------------------");
 
     while (fread(&stundentInformation, sizeof(stundentInformation), 1, fileOne) == 1)
     {
-        printf("\n\n\t\t%-20s%-13s%-10s%-25s%-15s%-.2f", stundentInformation.studentName, stundentInformation.studentId, stundentInformation.studentDept, stundentInformation.studentAddress, stundentInformation.studentContactNum, stundentInformation.studentCGPA);
+        printf("\n\n\t\t%-20s%-13s%-10s%-25s%-15s%-.2f", stundentInformation.studentName, stundentInformation.studentID, stundentInformation.studentDepartment, stundentInformation.studentAddress, stundentInformation.studentContactNumber, stundentInformation.studentCGPA);
     }
 
     printf("\n\n\t\tEnter any keys to continue.......");
@@ -130,7 +130,7 @@ void displayInfo()
     fclose(fileOne);
 }
 
-void updateInfo()
+void updateInformation()
 {
     FILE *fileOne = fopen("studentInfo.bin", "rb");
     FILE *temp = fopen("temp.bin", "wb");
@@ -148,17 +148,17 @@ void updateInfo()
 
     printf("\t\t\t\t====== Update Students Information ======\n");
 
-    printf("\n\t\t\tEnter Student's ID : ");
+    printf("\n\t\t\tEnter Student's ID: ");
     getchar();
-    gets(tempInformation.studentId);
+    gets(tempInformation.studentID);
 
     while (fread(&studentInformation, sizeof(studentInformation), 1, fileOne) == 1)
     {
-        if (strcmp(studentInformation.studentId, tempInformation.studentId) == 0)
+        if (strcmp(studentInformation.studentID, tempInformation.studentID) == 0)
         {
             flag++;
-            printf("\n\t\t\tChoose your option :\n\t\t\t1.Update Student Name\n\t\t\t2.Update Student Dept.\n\t\t\t3.Update Student Address\n\t\t\t4.Update Student Contact No.\n\t\t\t5.Update Student CPGA");
-            printf("\n\n\t\t\tEnter Your Option : ");
+            printf("\n\t\t\tChoose your option:\n\t\t\t1.Update Student Name\n\t\t\t2.Update Student Department\n\t\t\t3.Update Student Address\n\t\t\t4.Update Student ContactNumber\n\t\t\t5.Update Student CPGA");
+            printf("\n\n\t\t\tEnter Your Option: ");
             scanf("%d", &choice);
             if (choice == 1)
             {
@@ -172,10 +172,10 @@ void updateInfo()
             }
             else if (choice == 2)
             {
-                printf("\n\t\t\tEnter Student's Dept. to Update: ");
+                printf("\n\t\t\tEnter Student's Department to Update: ");
                 getchar();
-                gets(tempInformation.studentDept);
-                strcpy(studentInformation.studentDept, tempInformation.studentDept);
+                gets(tempInformation.studentDepartment);
+                strcpy(studentInformation.studentDepartment, tempInformation.studentDepartment);
 
                 fwrite(&studentInformation, sizeof(studentInformation), 1, temp);
                 printf("\n\n\t\t\tUpdated successfully!\n\n");
@@ -192,10 +192,10 @@ void updateInfo()
             }
             else if (choice == 4)
             {
-                printf("\n\t\t\tEnter Student's Contact No. to Update: ");
+                printf("\n\t\t\tEnter Student's ContactNumber to Update: ");
                 getchar();
-                gets(tempInformation.studentContactNum);
-                strcpy(studentInformation.studentContactNum, tempInformation.studentContactNum);
+                gets(tempInformation.studentContactNumber);
+                strcpy(studentInformation.studentContactNumber, tempInformation.studentContactNumber);
 
                 fwrite(&studentInformation, sizeof(studentInformation), 1, temp);
                 printf("\n\n\t\t\tUpdated successfully!\n\n");
@@ -236,7 +236,7 @@ void updateInfo()
     getch();
 }
 
-void deleteInfo()
+void deleteInformation()
 {
     FILE *fileOne = fopen("studentInfo.bin", "rb");
     FILE *temp = fopen("temp.bin", "wb");
@@ -254,16 +254,16 @@ void deleteInfo()
 
     printf("\t\t\t\t====== Delete Student Information ======\n");
 
-    printf("\n\t\t\tEnter Student's ID : ");
+    printf("\n\t\t\tEnter Student's ID: ");
     getchar();
-    gets(tempInformation.studentId);
+    gets(tempInformation.studentID);
 
     while (fread(&studentInformation, sizeof(studentInformation), 1, fileOne) == 1)
     {
-        if (strcmp(studentInformation.studentId, tempInformation.studentId) == 0)
+        if (strcmp(studentInformation.studentID, tempInformation.studentID) == 0)
         {
             flag++;
-            printf("\n\t\t\tAre you sure to delete ??\n\t\t\t\t1.Yes\n\t\t\t\t2.Back\n\t\t\t\tEnter Your Option : ");
+            printf("\n\t\t\tAre you sure to delete ??\n\t\t\t\t1.Yes\n\t\t\t\t2.Back\n\t\t\t\tEnter Your Option: ");
             scanf("%d", &choice);
             if (choice == 1)
             {
@@ -300,14 +300,14 @@ void deleteInfo()
     getch();
 }
 
-void searchInfo()
+void searchInformation()
 {
     FILE *fileOne = fopen("studentInfo.bin", "rb");
 
     Student studentInformation;
 
     int choice, flag = 0;
-    char studentID[20], studentDept[10];
+    char studentID[20], studentDepartment[10];
 
     if (fileOne == NULL)
     {
@@ -318,23 +318,23 @@ void searchInfo()
 
     printf("\t\t\t\t====== Search Student Information ======\n");
 
-    printf("\n\t\t\tChoose your option :\n\t\t\t1.Search by Student ID\n\t\t\t2.Search by Student Dept.");
-    printf("\n\n\t\t\tEnter Your Option : ");
+    printf("\n\t\t\tChoose your option:\n\t\t\t1.Search by Student ID\n\t\t\t2.Search by Student Department");
+    printf("\n\n\t\t\tEnter Your Option: ");
     scanf("%d", &choice);
 
     if (choice == 1)
     {
         system("cls");
         printf("\t\t\t\t====== Search Student Information ======\n");
-        printf("\n\n\t\t\tEnter Student ID : ");
+        printf("\n\n\t\t\tEnter Student ID: ");
         getchar();
         gets(studentID);
         while (fread(&studentInformation, sizeof(studentInformation), 1, fileOne) == 1)
         {
-            if (strcmp(studentInformation.studentId, studentID) == 0)
+            if (strcmp(studentInformation.studentID, studentID) == 0)
             {
                 flag++;
-                printf("\n\t\t\tStudent Name : %s\n\t\t\tStudent ID : %s\n\t\t\tStudent Dept. : %s\n\t\t\tStudent Address : %s\n\t\t\tStudent Contact No. : %s\n\t\t\tStudent CGPA : %.2f\n", studentInformation.studentName, studentInformation.studentId, studentInformation.studentDept, studentInformation.studentAddress, studentInformation.studentContactNum, studentInformation.studentCGPA);
+                printf("\n\t\t\tStudent Name: %s\n\t\t\tStudent ID: %s\n\t\t\tStudent Department: %s\n\t\t\tStudent Address: %s\n\t\t\tStudent ContactNumber: %s\n\t\t\tStudent CGPA: %.2f\n", studentInformation.studentName, studentInformation.studentID, studentInformation.studentDepartment, studentInformation.studentAddress, studentInformation.studentContactNumber, studentInformation.studentCGPA);
             }
         }
         if (flag == 0)
@@ -346,17 +346,17 @@ void searchInfo()
     {
         system("cls");
         printf("\t\t\t\t====== Search Student Information ======\n");
-        printf("\n\n\t\t\tEnter Student Dept. : ");
+        printf("\n\n\t\t\tEnter Student Department: ");
         getchar();
-        gets(studentDept);
-        printf("\n\n\t\t%-20s%-13s%-10s%-25s%-15s%-s\n", "Name", "ID", "Dept.", "Address", "Contact", "CGPA");
+        gets(studentDepartment);
+        printf("\n\n\t\t%-20s%-13s%-10s%-25s%-15s%-s\n", "Name", "ID", "Department", "Address", "Contact", "CGPA");
         printf("\t\t----------------------------------------------------------------------------------------");
         while (fread(&studentInformation, sizeof(studentInformation), 1, fileOne) == 1)
         {
-            if (stricmp(studentInformation.studentDept, studentDept) == 0)
+            if (stricmp(studentInformation.studentDepartment, studentDepartment) == 0)
             {
                 flag++;
-                printf("\n\n\t\t%-20s%-13s%-10s%-25s%-15s%-.2f", studentInformation.studentName, studentInformation.studentId, studentInformation.studentDept, studentInformation.studentAddress, studentInformation.studentContactNum, studentInformation.studentCGPA);
+                printf("\n\n\t\t%-20s%-13s%-10s%-25s%-15s%-.2f", studentInformation.studentName, studentInformation.studentID, studentInformation.studentDepartment, studentInformation.studentAddress, studentInformation.studentContactNumber, studentInformation.studentCGPA);
             }
         }
         if (flag == 0)
