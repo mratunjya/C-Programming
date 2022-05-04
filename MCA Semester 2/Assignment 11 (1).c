@@ -120,7 +120,7 @@ int main()
         printf("2. Dequeue\n");       // Print the option to dequeue
         printf("3. Print Front\n");   // Print the option to print the front
         printf("4. Display\n");       // Print the option to display
-        printf("5. Traverse\n");      // Print the option to traverse
+        printf("5. Traverse (Search)\n");      // Print the option to traverse
         printf("6. Exit\n");          // Print the option to exit
         printf("Enter your choice: ");
         scanf("%d", &choice); // Get the user's choice
